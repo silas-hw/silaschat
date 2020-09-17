@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+
+    <meta property="og:url" content="https://silaschat.tk/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="silaschat">
+    <meta property="og:description" content="chatroom by silas lmao haha brrrrr">
+    <meta property="og:image" content="https://i.redd.it/iwnix5v7wux21.jpg">
+
+    {% block head %}
+    <title>silaschat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='img/favicon.png')}}">
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Chat room made by silas">
+    <meta name="keywords" content="chatroom, chat, room, silas, silaschat, silas chat, silaschatroom">
+    <meta name="author" content="Silas Hayes-Williams">
+    
+
+    <!-- google verification -->
+
+    <meta name="google-site-verification" content="S5KXVimI9uOlQH-s7TWjIQ8EUvHJ3Ox3hYmO4VFP0Xc" />
+
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% block scripts %}
+{% endblock %}
+</html>

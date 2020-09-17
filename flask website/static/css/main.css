@@ -1,0 +1,350 @@
+body {
+    overflow: hidden;
+    font-family: "Arial";
+    color: White;
+    background-color:#23272a;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+div.maincontainer{
+    position: relative;
+    width: 100%;
+    height: 90;
+    float: left;
+    padding: 10px;
+}
+
+@media (min-width: 1280px){
+div.maincontainer{
+    position: relative;
+    width: 80vw;
+    height: 100%;
+    float: left;
+    padding: 10px;
+}
+}
+
+img.settings{
+    position: absolute;
+    top: 3%;
+    right: 1.5%;
+    width: 50px;
+    height: 50px;
+    transition: 1s;
+
+    filter: invert(32%) sepia(0%) saturate(1947%) hue-rotate(150deg) brightness(104%) contrast(91%);
+}
+
+@media (min-width: 1280px){
+img.settings{
+    position: absolute;
+    top: 3%;
+    right: 1.5%;
+    width: 50px;
+    height: 50px;
+    transition: 1s;
+
+    filter: invert(32%) sepia(0%) saturate(1947%) hue-rotate(150deg) brightness(104%) contrast(91%);
+}
+}
+
+img.settings:hover{
+    cursor: pointer;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+div.chat {
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    height: 80vh;
+
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 1280px){
+div.chat {
+    overflow-y: auto;
+    overflow-wrap: break-word;
+
+    position: absolute;
+    height: 87vh;
+    width: 100%;
+}
+}
+
+p.chat-text{
+    font-size: 3em;
+}
+
+@media (min-width: 1280px){
+p.chat-text{
+    font-size: 1em
+}
+}
+
+div.msgcontainer{
+    position: absolute;
+    top: 80vh;
+    width: 100%;
+}
+
+@media (min-width: 1280px){
+div.msgcontainer{
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: 90vh;
+}
+}
+
+form {
+    /* This bit sets up the horizontal layout */
+    display:flex;
+    flex-direction:row;
+      
+    /* I've used padding so you can see the edges of the elements. */
+    padding:5px;
+    
+    outline: none;
+    border-radius: 15px;
+    
+    width: 95%;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    background-color: #2c2f33;
+}
+
+@media (min-width: 1280px){
+form {
+    /* This bit sets up the horizontal layout */
+    display:flex;
+    flex-direction:row;
+      
+    /* I've used padding so you can see the edges of the elements. */
+    padding:5px;
+    
+    outline: none;
+    border-radius: 15px;
+    
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    background-color: #2c2f33;
+}
+}
+
+input{
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding-left: 30px;
+    color: white;
+}
+
+input.inpmsg{
+    height: 90px;
+    flex-grow: 5;
+    margin-top: 14px;
+    font-size: 40px;
+    background-color: rgba(193, 66, 66, 0)
+}
+
+@media (min-width: 1280px){
+input.inpmsg{
+    flex-grow: 5; 
+    height: 40px;
+    margin-top: 6px;
+    font-size: 20px;
+    background-color: rgba(193, 66, 66, 0)
+}
+}
+
+button{
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: #7289da;
+    color: white;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #72a6da;
+}
+
+button.send{
+    opacity: 0;
+    font-size: 2em;
+    height: 100px;
+    width: 200px;
+    right: 5px;
+    transition: width 2s, opacity 0.5s, font-size 5s, color 8s;
+}
+
+@media (min-width: 1280px){
+button.send{
+    opacity: 0;
+    font-size: 0.8em;
+    height: 50px;
+    width: 100px;
+    transition: width 1s, opacity 0.5s, font-size 0.25s, color 8s;
+}
+}
+
+div.userscontainer{
+    width: 15vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: none;
+}
+
+@media (min-width: 1280px){
+div.userscontainer{
+    float: right;
+    width: 15vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+}
+
+/* setname page */
+
+div.container1{
+    text-align: center; 
+    position: relative;
+    height: 99vh;
+    width: 99vw;
+}
+
+div.container2{
+    margin: 0; 
+    position: absolute; 
+    top: 40%; 
+    left: 50%; 
+    -ms-transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
+}
+
+input.inpname{
+    background-color: #2c2f33;
+    width: 467px;
+    height: 100px;
+    font-size:2em;
+}
+
+button.submitbutton{
+    width: 490px;
+    height: 100px;
+    font-size: 2em;
+    transition: 1s;
+}
+
+@media (min-width: 1280px){
+input.inpname{
+    background-color: #2c2f33;
+    width: 280px;
+    height: 60px;
+    font-size:1.2em;
+}
+
+button.submitbutton{
+    width: 310px;
+    height: 60px;
+    font-size: 1.2em;
+    transition: 1s;
+}
+}
+
+/* scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(193, 66, 66, 0);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #383838;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #383838;
+  }
+
+/* settings page */
+
+div.settingscontainer{
+    width: 50vw;
+    height: 50vh;
+
+    position: absolute;
+    
+    top: 40%; 
+    left: 50%; 
+    -ms-transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
+}
+div.slidecontainer{
+    position: relative;
+    width: 200px;
+    margin: auto;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 15px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    border-radius: 10px;
+  }
+  
+  /* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4c74af; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%;
+}
+  
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4c74af; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%;
+}

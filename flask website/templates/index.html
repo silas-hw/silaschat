@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+
+    <div class="maincontainer">
+        <div id="chat" class="chat"></div> 
+        <img class="settings" onclick="window.location.assign('../setname')" src="https://image.flaticon.com/icons/png/512/61/61094.png" alt="settings"></img>
+        
+        <div class="msgcontainer" id="msginp">
+            <form id="msgform">
+                <input class="inpmsg" autocomplete="off" type="text" id="input" placeholder="Enter message" onfocus="inpfocus()" onblur="inpunfocus()"></input>
+                <button type="button" class="send" id="sendbtn" onclick="sendmessage()">send</button>
+            </form>   
+        </div>
+        <p id="ping" style="position: absolute; top: 95vh;"></p>
+    </div>
+
+    <div class="userscontainer" id="userlist">
+
+    </div>
+    
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"> </script>
+<script src="{{ url_for('static', filename='js/inpfocus.js') }}"> </script>
+{% endblock %}

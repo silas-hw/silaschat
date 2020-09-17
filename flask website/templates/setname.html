@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="container1">
+        <div class="container2">
+            <h1>Welcome!</h1>
+    
+            <input class="inpname" autocomplete="off" type="text" id="input" placeholder="Enter username"></input><br><br>
+            <button class="submitbutton" type="button" onclick="submitname()" ><b>ok</b></button>
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/setname.js') }}"> </script>
+{% endblock %}
