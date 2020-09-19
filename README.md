@@ -105,7 +105,7 @@ used by the [serverConn](#serverConn) message to provide information of server s
 | :------        | :--------           | :---------------------------------       |
 | currentConn    | integer             | Number of currently connected clients    |
 | msgHistory     | array of messages   | A history of messages sent to the server |
-| currentUsers   | array of tuples     | A list of currently connected users      | 
+| currentUsers   | array of tuples     | A list of currently connected users      |
 
 ### user  
 
