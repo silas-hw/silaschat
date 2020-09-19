@@ -12,10 +12,10 @@ The type of the message can be determined by having a `"type"` property in the j
 
 `message` objects represent the plain text messages sent by users of the website
 
-| Property | Type        | Description                        |
-| :------  | :--------   | :--------------------------------- |
-| content  | string      | The text content of message        |
-| user     | user object | The user who sent the message      |  
+| Property | Type                 | Description                        |
+| :------  | :--------            | :--------------------------------- |
+| content  | string               | The text content of message        |
+| user     | [user](#user) object | The user who sent the message      |  
 
 example object:  
 
@@ -34,17 +34,9 @@ example object:
 
 `serverConn` messages are sent to a client when the server connects to them. It includes the message history, current client count and current connected users  
 
-| Property | Type                     | Description                           |
-| :------  | :--------                | :---------------------------------    |
-| setup    | server setup object      | Includes information about the server |  
-
-`server setup` object:
-
-| Property       | Type                | Description                              |
-| :------        | :--------           | :---------------------------------       |
-| currentConn    | integer             | Number of currently connected clients    |
-| msgHistory     | array of messages   | A history of messages sent to the server |
-| currentUsers   | array of tuples     | A list of currently connected users      |  
+| Property | Type                                      | Description                           |
+| :------  | :--------                                 | :---------------------------------    |
+| setup    | [server setup](#server-setup) object      | Includes information about the server |  
 
 example object:  
 
@@ -54,7 +46,7 @@ example object:
     "setup":{
         "currentConn":43,
         "msgHistory":[],
-        "currentUsers":[("silas", "#34ebd8")]
+        "currentUsers":[["silas", "#34ebd8"]]
     }
 }
 ```  
@@ -88,7 +80,38 @@ example object:
 
 ```json
 {
-    "type":"clientConn",
+    "type":"newClient",
     "username":"xyzzy"
 }
 ```
+
+### clientDisconn  
+
+sent by the server to every client upon another client disconnecting  
+
+| Property | Type                  | Description                          |
+| :------  | :--------             | :---------------------------------   |
+| user     | [user](#user) object  | The user that disconnected           |  
+
+## objects  
+
+Some messages use certain objects, such as `user objects`
+
+### server-setup
+
+used by the [serverConn](#serverConn) message to provide information of server state and message history  
+
+| Property       | Type                | Description                              |
+| :------        | :--------           | :---------------------------------       |
+| currentConn    | integer             | Number of currently connected clients    |
+| msgHistory     | array of messages   | A history of messages sent to the server |
+| currentUsers   | array of tuples     | A list of currently connected users      | 
+
+### user  
+
+used when needing information on a given user  
+
+| Property | Type        | Description                          |
+| :------  | :--------   | :---------------------------------   |
+| colour   | hex string  | The display colour of the user       |  
+| name     | string      | The username of the user             |  
