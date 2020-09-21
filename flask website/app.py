@@ -41,5 +41,12 @@ def userlist():
     return json.dumps(users)
 
 if __name__ == '__main__':
+
+    #allows easy change of ip and port
+    with open("config.json", "r") as f:
+        config = json.loads(f.read())
+        ip = config['ip']
+        port = config['port']
+
     context=('./silaschat.tk.chained.crt', './privkey.pem')
-    app.run(host="192.168.0.35", port=443, ssl_context=context)
+    app.run(host=ip, port=port, ssl_context=context)
