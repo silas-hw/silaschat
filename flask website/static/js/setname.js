@@ -1,3 +1,6 @@
+
+
+
 function getCookie(a) {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
@@ -5,8 +8,15 @@ function getCookie(a) {
 
 var input = document.getElementById("input")
 
+//var protocol = window.location.protocol;
+//var host = window.location.host;
+//var url = protocol+'//'+host;
+
+var url = "https://silaschat.tk"
+
+
 submitname = function(event) {
-    var response = fetch('https://silaschat.tk/userlist')
+    var response = fetch(url+'/userlist')
     .then(response => response.json())
     .then(response => {
     if (input.value && !response.users.includes(input.value))  {
@@ -20,7 +30,7 @@ submitname = function(event) {
                 "name": input.value
             }
 
-            fetch('https://silaschat.tk/userlist',
+            fetch(url+'/userlist',
             {
                 method:"POST",
                 body: JSON.stringify(data)
@@ -30,7 +40,7 @@ submitname = function(event) {
                 "type":"new",
                 "name":input.value
             }
-            fetch('https://silaschat.tk/userlist',
+            fetch(url+'/userlist',
             {
                 method:"POST",
                 body: JSON.stringify(data)
