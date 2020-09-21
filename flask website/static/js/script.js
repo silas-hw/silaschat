@@ -157,6 +157,27 @@ sendmessage = function(event) {
     }
 }
 
+closeimgdiv = function(event){
+    var elem = document.getElementById("openimg");
+    elem.style.display = "none";
+}
+
+var imginput = document.getElementById("imgurl");
+sendimg = function(event) {
+    if (socket.readyState === 1 && imginput.value){
+        var msg = {
+            "type":"image",
+            "url":imginput.value,
+            "user":{
+                "name": username,
+                "colour": usercolour
+            }
+        }
+        socket.send(JSON.stringify(msg))
+    }
+
+    closeimgdiv();
+}
 //prevents the form from refreshing the page on submit
 var form = document.getElementById("msgform");
 
@@ -177,3 +198,9 @@ input.addEventListener("keyup", function(event) {
 settings = function(event) {
     window.location.href("../setname")
 }
+
+openimg = function(event) {
+    var elem = document.getElementById("openimg");
+    elem.style.display = "block";
+}
+
