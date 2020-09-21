@@ -2,12 +2,22 @@
 {% block body %}
 
     <div class="maincontainer">
-        <div id="chat" class="chat"></div> 
+        <div id="chat" class="chat">
+            <p class="chat-text">
+                <mark for="img" style="color:#b854a7; background:none;">silashw</mark>:
+            </p>
+            <img id="img" src="https://i1.sndcdn.com/avatars-000728566066-cos2c5-t500x500.jpg">
+
+        </div> 
+        
         <img class="settings" onclick="window.location.assign('../setname')" src="https://image.flaticon.com/icons/png/512/61/61094.png" alt="settings"></img>
         
         <div class="msgcontainer" id="msginp">
             <form id="msgform">
                 <input class="inpmsg" autocomplete="off" type="text" id="input" placeholder="Enter message" onfocus="inpfocus()" onblur="inpunfocus()"></input>
+                
+                <img class="sendimg" src="https://icons.iconarchive.com/icons/roundicons/100-free-solid/512/image-icon.png" width="50", height="50" onclick="openimg()">
+                
                 <button type="button" class="send" id="sendbtn" onclick="sendmessage()">send</button>
             </form>   
         </div>
@@ -16,6 +26,12 @@
 
     <div class="userscontainer" id="userlist">
 
+    </div>
+
+    <div class="openimg" id="openimg">
+            <input class="inpimgurl" id="imgurl"></input><br>
+            <button type="button" class="closeimg" onclick="closeimgdiv()">close</button>
+            <button type="button" class="sendimg" id="sendimg" onclick="sendimg()">send</button>
     </div>
     
 {% endblock %}
