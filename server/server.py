@@ -165,7 +165,9 @@ async def handle_client(websocket, port):
     for client in clients:
         await client.send(json.dumps(clientDisconnMsg))
 
-    users.remove(tuple((username, usercolour)))
+    for user in users:
+        if user[0] == username:
+            users.remove(user)
 
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
