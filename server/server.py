@@ -80,6 +80,10 @@ async def handle_client(websocket, port):
             if msg['type'] not in ['ping']:
                 msgLog.add(byteMsg)
             
+            if msg['type'] == "image":
+                for client in clients:
+                    await client.send(byteMsg)
+
             if msg['type'] == "message":
                 for client in clients:
                     await client.send(byteMsg)
@@ -167,7 +171,7 @@ async def handle_client(websocket, port):
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.load_cert_chain("cert.pem", "privkey.pem")
 
-start_server = websockets.serve(handle_client, "192.168.0.35", 5050, ssl=ssl_context)
+start_server = websockets.serve(handle_client, "192.168.0.11", 5055, ssl=ssl_context)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
