@@ -91,6 +91,14 @@ p.chat-text{
 }
 }
 
+img.imgMessage{
+    max-width: 800px;
+    max-width: 800px;
+    object-fit: cover;
+
+    border-radius: 15px;
+}
+
 div.msgcontainer{
     position: absolute;
     top: 80vh;

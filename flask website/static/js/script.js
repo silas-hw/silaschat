@@ -44,7 +44,7 @@ var colours = ["#59bd73", "#5966bd", "#bd8959", "#b854a7", "#cc2554"]
 var usercolour = colours[Math.floor(Math.random() * colours.length)]
 
 var input = document.getElementById("input");
-var socket = new WebSocket("wss://silaschat.tk:5050");
+var socket = new WebSocket("wss://silaschat.tk:5055");
 
 ping = function(event) {
     pingMsg = {
@@ -98,30 +98,43 @@ removeUser = function(msg){
 }
 
 addMessage = function(msg) {
-    if (msg.type === "message"){
-        var name = document.createElement("mark")
-        name.setAttribute("style", "color:"+msg.user.colour+"; background:none;")
-        var username = document.createTextNode(msg.user.name)
-        name.appendChild(username)
+    var element = document.getElementById("chat");
 
-        var para = document.createElement("p");
-        para.setAttribute("class", "chat-text")
+    var name = document.createElement("mark")
+    name.setAttribute("style", "color:"+msg.user.colour+"; background:none;")
+    var username = document.createTextNode(msg.user.name)
+    name.appendChild(username)
+
+    var para = document.createElement("p");
+    para.setAttribute("class", "chat-text")
+
+    para.appendChild(name)
+
+    if (msg.type === "message"){
+    
         var content = document.createTextNode(": "+msg.content);
-        
-        para.appendChild(name)
         para.appendChild(content);
 
-        var element = document.getElementById("chat");
         element.appendChild(para);
+        
+    } else if(msg.type === "image"){
+        var img = document.createElement("img")
+        img.setAttribute("src", msg.url)
+        img.setAttribute("class", "imgMessage")
 
-        element.scrollTop = element.scrollHeight;
-    } 
+        element.appendChild(para)
+        element.appendChild(img)
+    }
+
+    element.scrollTop = element.scrollHeight;
 }
 
 socket.onmessage = function(event) {
     var msg = JSON.parse(event.data);
     
     if (msg.type==='message'){
+        addMessage(msg)
+    } else if(msg.type==='image'){
         addMessage(msg)
     } else if(msg.type==='serverConn') {
         for (var i = 0; i < msg.setup.msgHistory.length; i++) {
