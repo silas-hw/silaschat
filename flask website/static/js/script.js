@@ -123,6 +123,7 @@ addMessage = function(msg) {
     } else if(msg.type === "image"){
         var img = document.createElement("img")
         img.setAttribute("src", msg.url)
+        img.setAttribute("onerror", "this.src='/static/img/noimg.png'")
         img.setAttribute("class", "imgMessage")
 
         element.appendChild(para)
