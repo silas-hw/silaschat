@@ -63,7 +63,7 @@ img.settings:hover{
 div.chat {
     overflow-y: auto;
     overflow-wrap: break-word;
-    height: 80vh;
+    height: 85vh;
 
     width: 100%;
     margin-left: auto;
@@ -101,7 +101,7 @@ img.imgMessage{
 
 div.msgcontainer{
     position: absolute;
-    top: 80vh;
+    top: 85;
     width: 100%;
 }
 
@@ -285,6 +285,18 @@ div.userscontainer{
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
+}
+}
+
+#ping{
+    display: none;
+}
+
+@media (min-width: 1280px){
+#ping{
+    display: block;
+    position: absolute; 
+    top: 95vh;
 }
 }
 
