@@ -101,7 +101,7 @@ img.imgMessage{
 
 div.msgcontainer{
     position: absolute;
-    top: 85;
+    top: 85vh;
     width: 100%;
 }
 
@@ -115,6 +115,7 @@ div.msgcontainer{
 }
 
 form {
+    position: relative;
     /* This bit sets up the horizontal layout */
     display:flex;
     flex-direction:row;
@@ -127,8 +128,7 @@ form {
     
     width: 95%;
     
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     
     background-color: #2c2f33;
 }
