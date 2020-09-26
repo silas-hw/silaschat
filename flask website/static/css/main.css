@@ -216,7 +216,23 @@ button.send{
 img.sendimg{
     margin-right: 6px;
     cursor: pointer;
+
+    height: 100px;
+    width: 100px;
+    
     filter: invert(32%) sepia(0%) saturate(1947%) hue-rotate(150deg) brightness(104%) contrast(91%);
+}
+
+@media (min-width: 1280px){
+img.sendimg{
+    margin-right: 6px;
+    cursor: pointer;
+
+    height: 50px;
+    width: 50px;
+    
+    filter: invert(32%) sepia(0%) saturate(1947%) hue-rotate(150deg) brightness(104%) contrast(91%);
+}
 }
 
 div.openimg{
