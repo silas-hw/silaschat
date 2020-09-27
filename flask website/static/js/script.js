@@ -1,3 +1,6 @@
+const linkify = window.linkify;
+const jQuery = window.jQuery;
+
 function getCookie(a) {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
@@ -114,10 +117,28 @@ addMessage = function(msg) {
     para.appendChild(name)
 
     if (msg.type === "message"){
-    
-        var content = document.createTextNode(": "+msg.content);
-        para.appendChild(content);
+        
+        var content_linkified = linkifyHtml(msg.content);
+        var content_objects = jQuery.parseHTML(content_linkified);
+        var c = document.createTextNode(": ");
+        para.appendChild(c);
+        
+        for(i=0; i<content_objects.length; i++){
+            object = content_objects[i];
 
+            if(['A', 'B', 'I'].includes(object.tagName)){
+                para.appendChild(object);
+            } else {
+                
+                if(object.outerHTML){
+                    object = document.createTextNode(object.outerHTML);
+                } 
+                    
+                para.appendChild(object);
+            }
+            
+        }
+            
         element.appendChild(para);
         
     } else if(msg.type === "image"){
