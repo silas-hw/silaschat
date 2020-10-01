@@ -12,7 +12,7 @@ var input = document.getElementById("input")
 //var host = window.location.host;
 //var url = protocol+'//'+host;
 
-var url = "https://silaschat.tk"
+var url = "https://silaschat.tk:8080"
 
 
 submitname = function(event) {
