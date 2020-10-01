@@ -1,6 +1,19 @@
 const linkify = window.linkify;
 const jQuery = window.jQuery;
 
+var focused = true
+var msgCount = 0
+
+window.onfocus = function(){
+    focused = true;
+    msgCount = 0
+    document.title = "silaschat"
+}
+
+window.onblur = function(){
+    focused = false;
+}
+
 function getCookie(a) {
     var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
@@ -76,6 +89,9 @@ userConfigMsg = {
 }
 
 socket.onopen = function(event) {
+    var connecting = document.getElementById("wifi");
+    connecting.style.display = 'none';
+
     socket.send(JSON.stringify(userConfigMsg));
     window.setInterval(ping, 100);
 }
@@ -112,9 +128,9 @@ addMessage = function(msg) {
     name.appendChild(username)
 
     var para = document.createElement("p");
-    para.setAttribute("class", "chat-text")
+    para.setAttribute("class", "chat-text");
 
-    para.appendChild(name)
+    para.appendChild(name);
 
     if (msg.type === "message"){
         
@@ -126,56 +142,79 @@ addMessage = function(msg) {
         for(i=0; i<content_objects.length; i++){
             object = content_objects[i];
 
-            if(['A', 'B', 'I'].includes(object.tagName)){
-                para.appendChild(object);
+            if(['A', 'B', 'I'].includes(object.tagName) && object.innerHTML){
+                object = object;
             } else {
-                
                 if(object.outerHTML){
                     object = document.createTextNode(object.outerHTML);
                 } 
-                    
-                para.appendChild(object);
             }
+
+            para.appendChild(object);
             
         }
             
         element.appendChild(para);
         
     } else if(msg.type === "image"){
-        var img = document.createElement("img")
-        img.setAttribute("src", msg.url)
-        img.setAttribute("onerror", "this.src='/static/img/noimg.png'")
-        img.setAttribute("class", "imgMessage")
+        var img = document.createElement("img");
+        img.setAttribute("src", msg.url);
+        img.setAttribute("onerror", "this.src='/static/img/noimg.png'");
+        img.setAttribute("class", "imgMessage");
 
-        element.appendChild(para)
-        element.appendChild(img)
+        element.appendChild(para);
+        element.appendChild(img);
     }
 
     element.scrollTop = element.scrollHeight;
 }
 
+notifyMsg = function(msg){
+    console.log(Notification.permission)
+    if(Notification.permission === "granted"){
+        var notification = new Notification('NEW MESSAGE');
+        console.log(notification)
+    } else if(Notification.permissions === "default"){
+
+        console.log('yes')
+        //request notifications
+        Notification.requestPermission().then(function(permission) { 
+            console.log('permiss', permission)
+        });;
+    }
+}
+
+addUnreadMessage = function(){
+    msgCount++;
+    document.title = "silaschat - "+msgCount+" messages"
+}
+
 socket.onmessage = function(event) {
     var msg = JSON.parse(event.data);
-    
+
+    if(!focused && ['message', 'image'].includes(msg.type)){
+        addUnreadMessage()
+    }
+
     if (msg.type==='message'){
-        addMessage(msg)
+        addMessage(msg);
     } else if(msg.type==='image'){
-        addMessage(msg)
+        addMessage(msg);
     } else if(msg.type==='serverConn') {
         for (var i = 0; i < msg.setup.msgHistory.length; i++) {
-            addMessage(JSON.parse(msg.setup.msgHistory[i]))
+            addMessage(JSON.parse(msg.setup.msgHistory[i]));
         }
 
         for(var i = 0; i < msg.setup.currentUsers.length; i++){
-            addUser(msg.setup.currentUsers[i][0], msg.setup.currentUsers[i][1])
+            addUser(msg.setup.currentUsers[i][0], msg.setup.currentUsers[i][1]);
         }
     } else if(msg.type==='newClient'){
-        addUser(msg.user.name, msg.user.colour)
+        addUser(msg.user.name, msg.user.colour);
     } else if(msg.type==='clientDisconn'){
         console.log("User disconn");
-        removeUser(msg)
+        removeUser(msg);
     } else if(msg.type==='pong'){
-        updatePing(msg.time, Date.now())
+        updatePing(msg.time, Date.now());
     }
 }
 
@@ -189,9 +228,9 @@ sendmessage = function(event) {
                 "name":username,
                 "colour": usercolour
             }
-        }
+        };
         socket.send(JSON.stringify(msg));
-        input.value = ""
+        input.value = "";
     }
 }
 
@@ -210,8 +249,8 @@ sendimg = function(event) {
                 "name": username,
                 "colour": usercolour
             }
-        }
-        socket.send(JSON.stringify(msg))
+        };
+        socket.send(JSON.stringify(msg));
     }
 
     closeimgdiv();
@@ -234,11 +273,10 @@ input.addEventListener("keyup", function(event) {
 });
 
 settings = function(event) {
-    window.location.href("../setname")
-}
+    window.location.href("../setname");
+};
 
 openimg = function(event) {
     var elem = document.getElementById("openimg");
     elem.style.display = "block";
-}
-
+};
