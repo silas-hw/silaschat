@@ -61,6 +61,7 @@ var usercolour = colours[Math.floor(Math.random() * colours.length)]
 
 var input = document.getElementById("input");
 var connGif = document.getElementById("wifi");
+var retry = document.getElementById("retry");
 
 var sitePort = location.port
 var socketPort = parseInt(sitePort) + 4607 //the sockets of the port is always 4607 above the sites port
@@ -73,6 +74,19 @@ socket.onclose = function(event){
 socket.onerror = function(event){
     connGif.src = "/static/img/nowifi.png";
     connGif.style.display = "block";
+
+    retry.style.display = "block";
+    var time = 15;
+    var timeInterval = 1000;
+
+    window.setTimeout(function(){
+        location.reload();
+    }, timeInterval*time)
+    
+    window.setInterval(function(){
+        retry.innerHTML = "Retrying in "+time+"s";
+        time--;
+    }, timeInterval)
 }
 
 ping = function(event) {
