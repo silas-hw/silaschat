@@ -60,10 +60,20 @@ var colours = ["#59bd73", "#5966bd", "#bd8959", "#b854a7", "#cc2554"]
 var usercolour = colours[Math.floor(Math.random() * colours.length)]
 
 var input = document.getElementById("input");
+var connGif = document.getElementById("wifi");
 
 var sitePort = location.port
 var socketPort = parseInt(sitePort) + 4607 //the sockets of the port is always 4607 above the sites port
 var socket = new WebSocket("wss://silaschat.tk:"+socketPort);
+
+socket.onclose = function(event){
+    var socket = new WebSocket("wss://silaschat.tk:"+socketPort);
+}
+
+socket.onerror = function(event){
+    connGif.src = "/static/img/nowifi.png";
+    connGif.style.display = "block";
+}
 
 ping = function(event) {
     pingMsg = {
@@ -89,8 +99,7 @@ userConfigMsg = {
 }
 
 socket.onopen = function(event) {
-    var connecting = document.getElementById("wifi");
-    connecting.style.display = 'none';
+    connGif.style.display = "none";
 
     socket.send(JSON.stringify(userConfigMsg));
     window.setInterval(ping, 100);
