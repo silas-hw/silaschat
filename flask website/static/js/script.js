@@ -63,8 +63,10 @@ var input = document.getElementById("input");
 var connGif = document.getElementById("wifi");
 var retry = document.getElementById("retry");
 
-var sitePort = location.port
-var socketPort = parseInt(sitePort) + 4607 //the sockets of the port is always 4607 above the sites port
+//var sitePort = location.port
+//var socketPort = parseInt(sitePort) + 4607 //the sockets of the port is always 4607 above the sites port
+
+var socketPort = 5050
 var socket = new WebSocket("wss://silaschat.tk:"+socketPort);
 
 socket.onclose = function(event){
