@@ -30,6 +30,14 @@ example object:
 }
 ```
 
+### image  
+
+an image message
+
+| Property | Type                  | Description                                 |
+| :------  | :--------             | :---------------------------------          |
+| url      | string                | The url of the image                        |
+
 ### serverConn  
 
 `serverConn` messages are sent to a client when the server connects to them. It includes the message history, current client count and current connected users  
@@ -92,6 +100,22 @@ sent by the server to every client upon another client disconnecting
 | Property | Type                  | Description                          |
 | :------  | :--------             | :---------------------------------   |
 | user     | [user](#user) object  | The user that disconnected           |  
+
+### ping  
+
+sent by the client to the server to calculate how long it takes a message to be received and sent back  
+
+| Property | Type                  | Description                                 |
+| :------  | :--------             | :---------------------------------          |
+| time     | float                 | The current epoch time                      |  
+
+### pong  
+
+sent by the server upon a client sending a ping message, effectively a copy of the ping message
+
+| Property | Type                  | Description                                 |
+| :------  | :--------             | :---------------------------------          |
+| time     | float                 | The epoch time from a received ping message |
 
 ## objects  
 
