@@ -176,7 +176,7 @@ async def handle_client(websocket, port):
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.load_cert_chain("cert.pem", "privkey.pem")
 
-start_server = websockets.serve(handle_client, "192.168.0.11", 12687, ssl=ssl_context) #websocket port will always be 4607 more than the websites port
+start_server = websockets.serve(handle_client, "192.168.0.35", 5050, ssl=ssl_context) #websocket port will always be 4607 more than the websites port
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
