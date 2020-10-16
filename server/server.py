@@ -80,6 +80,10 @@ async def handle_client(websocket, port):
             if msg['type'] not in ['ping']:
                 msgLog.add(byteMsg)
             
+            if msg['type'] == "image":
+                for client in clients:
+                    await client.send(byteMsg)
+
             if msg['type'] == "message":
                 for client in clients:
                     await client.send(byteMsg)
@@ -145,7 +149,10 @@ async def handle_client(websocket, port):
         logging.info(f"[CONNECTION ENDED] {remote_ip}")
         
     except websockets.exceptions.ConnectionClosedError:
-        logging.error(f"{remote_ip} disconnected unexpectedly")
+        logging.error(f"[CONNECTION ENDED] {remote_ip} disconnected unexpectedly")
+
+    except Exception as err:
+        logging.error(f"[CONNECTION ENDED] {remote_ip} disconnected for unknown reasons or errors:\n{err}")
     
     clients.remove(websocket)
     clientCount -= 1
@@ -161,13 +168,15 @@ async def handle_client(websocket, port):
     for client in clients:
         await client.send(json.dumps(clientDisconnMsg))
 
-    users.remove(tuple((username, usercolour)))
+    for user in users:
+        if user[0] == username:
+            users.remove(user)
 
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.load_cert_chain("cert.pem", "privkey.pem")
 
-start_server = websockets.serve(handle_client, "192.168.0.35", 5050, ssl=ssl_context)
+start_server = websockets.serve(handle_client, "192.168.0.11", 12687, ssl=ssl_context) #websocket port will always be 4607 more than the websites port
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
